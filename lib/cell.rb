@@ -17,4 +17,17 @@ class Cell
       false
     end
   end
+
+  def fire_upon
+    @ship.hit
+  end
+
+#### this method may be questionable?
+  def fired_upon?
+    if @ship.health < @ship.length
+      true
+    else
+      false
+    end
+  end
 end
