@@ -1,1 +1,5 @@
-here is an update
+class Cell
+  def initialize(coordinate)
+    @coordinate = coordinate
+  end
+end
