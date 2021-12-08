@@ -12,4 +12,9 @@ RSpec.describe Cell do
     cell = Cell.new("B4")
     expect(cell.coordinate).to eq("B4")
   end
+
+  it 'ship equals nil' do
+    cell = Cell.new("B4")
+    expect(cell.ship).to eq(nil)
+  end
 end
