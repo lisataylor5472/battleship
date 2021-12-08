@@ -18,4 +18,14 @@ RSpec.describe Ship do
     expect(cruiser.length).to eq(3)
   end
 
+  it 'has health' do
+  cruiser = Ship.new("Cruiser", 3)
+  expect(cruiser.health).to eq(3)
+end
+
+it 'has sunk' do
+  cruiser = Ship.new("Cruiser", 3)
+  expect(cruiser.sunk?).to eq(false)
+end
+
 end
