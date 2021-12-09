@@ -1,9 +1,10 @@
 class Cell
-  attr_reader :coordinate, :ship
+  attr_reader :coordinate, :ship, :render
 
   def initialize(coordinate)
     @coordinate = coordinate
     @ship = nil
+    @render = "."
   end
 
   def place_ship(picked_ship)
@@ -30,4 +31,5 @@ class Cell
       false
     end
   end
+
 end

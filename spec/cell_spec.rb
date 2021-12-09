@@ -63,4 +63,15 @@ RSpec.describe Cell do
     expect(cell.fired_upon?).to eq(true)
   end
 
+  it 'render "."' do
+    #cell = Cell.new("B4")
+    #cruiser = Ship.new("Cruiser", 3)
+    #cell.place_ship(cruiser)
+    #cell.fire_upon
+    cell_1 = Cell.new("B4")
+
+    expect(cell_1.render).to eq(".")
+  
+  end
+
 end
