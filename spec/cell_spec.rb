@@ -85,7 +85,7 @@ RSpec.describe Cell do
     expect(cell_1.render).to eq("M")
   end
 
-  it 'render "M"' do
+  it 'render cell_2 to eq "."' do
     #cell = Cell.new("B4")
     #cruiser = Ship.new("Cruiser", 3)
     #cell.place_ship(cruiser)
