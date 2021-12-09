@@ -20,7 +20,14 @@ class Cell
   end
 
   def fire_upon
-    @ship.hit
+    if @ship == nil
+      @render = "M"
+    elsif @ship != nil
+      @render = "H"
+      @ship.hit
+    elsif @ship.sunk? == true
+      @render = "X"
+    end
   end
 
 #### this method may be questionable?
@@ -31,5 +38,4 @@ class Cell
       false
     end
   end
-
 end
