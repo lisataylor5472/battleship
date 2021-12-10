@@ -112,4 +112,19 @@ RSpec.describe Cell do
     #cell_1.fire_upon
     expect(cell_2.render(true)).to eq("S")
   end
+
+  it 'render cell_2 to eq "S"' do
+    #cell = Cell.new("B4")
+    #cruiser = Ship.new("Cruiser", 3)
+    #cell.place_ship(cruiser)
+    #cell.fire_upon
+    cell_1 = Cell.new("B4")
+    cell_2 = Cell.new("C3")
+    cruiser = Ship.new("Cruiser", 3)
+    cell_1.fire_upon
+    cell_2.fire_upon
+    cell_2.place_ship(cruiser)
+    #cell_1.fire_upon
+    expect(cell_2.render).to eq("H")
+  end
 end
