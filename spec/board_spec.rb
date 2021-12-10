@@ -18,7 +18,7 @@ RSpec.describe Board do
     expect(board.cells.values[0]).to be_a(Cell)
   end
 
-  it 'valid coordinate A1 is true' do
+  it 'valid coordinate passes' do
     board = Board.new
 
     expect(board.valid_coordinate?("A1")).to eq(true)
@@ -26,7 +26,15 @@ RSpec.describe Board do
     expect(board.valid_coordinate?("A5")).to eq(false)
     expect(board.valid_coordinate?("E1")).to eq(false)
     expect(board.valid_coordinate?("A22")).to eq(false)
-
-
   end
+
+  it 'valid coordinate passes' do
+    board = Board.new
+    cruiser = Ship.new("Cruiser", 3)
+    submarine = Ship.new("Submarine", 2)
+
+    expect(board.valid_placement?(cruiser, ["A1", "A2"])).to eq(false)
+  end
+
+
 end
