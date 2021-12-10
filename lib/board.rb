@@ -2,7 +2,7 @@ class Board
   def initialize
   end
 
-  def cells # so cute 
+  def cells # so cute
     {
     "A1" => Cell.new("A1"),
     "A2" => Cell.new("A2"),
@@ -21,5 +21,13 @@ class Board
     "D3" => Cell.new("D3"),
     "D4" => Cell.new("D4")
     }
+  end
+
+  def valid_coordinate?(arg)
+    if cells.keys.include?(arg)
+      true
+    else
+      false
+    end
   end
 end
