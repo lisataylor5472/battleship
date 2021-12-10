@@ -37,5 +37,21 @@ RSpec.describe Board do
     expect(board.valid_placement?(submarine, ["A2", "A3", "A4"])).to eq(false)
   end
 
+  it 'valid placement coords are consecutive is false' do
+    board = Board.new
+    cruiser = Ship.new("Cruiser", 3)
+    submarine = Ship.new("Submarine", 2)
+    # binding.pry
+    expect(board.valid_placement?(cruiser, ["A1", "A2", "A4"])).to eq(false)
+  end
+
+  it 'valid placement coords are consecutive is true' do
+    board = Board.new
+    cruiser = Ship.new("Cruiser", 3)
+    submarine = Ship.new("Submarine", 2)
+    # binding.pry
+    expect(board.valid_placement?(submarine, ["A1", "C1"])).to eq(false)
+  end
+
 
 end

@@ -31,9 +31,39 @@ class Board
     end
   end
 
-  def valid_placement?(ship, coordinates)
-    if ship.length != coordinates.length
+  def valid_placement?(ship, coords)
+    if ship.length == coords.length && coords.map { |coord| coord[1] } == ["1", "2", "3"]#[coords[0][1].to_s, coords[0][1]+1.to_s, coords[0][1]+2.to_s]
+      # consecutive_coords?(coords)
+      true
+    # elsif   # the coordinates are consecutive horizontally
+    # elsif c.map { |coord| coord[1] } == [c[0][1], (c[0][1]+1), (c[0][1]+2)]
+    else
       false
+      # digits_only = []
+      # coordinates.each do |coordinate|
+      #   digits_only << coordinate[1]
+      #   digits_only.each_cons(ship.length) ==
+      # digits_only = []
+      # coordinates.each do |coordinate|
+      #   digits_only << coordinate[1]
+      #   if digits_only == (coordinates.min..coordinates.max).to_a
+      #     true
+      #   end
+      # coordinates.ord.all
     end
   end
+                                # c = ["A1", "A2", "A4"]   ["1", "2", "4"]
+  # def consecutive_coords?(coords)
+  #   if coords.map { |coord| coord[1] } == [coords[0][0].to_s, coords[0][0]+1.to_s, coords[0][0]+2.to_s]
+  #   end
+  # end
+
 end
+
+
+
+
+
+# elsif the coords are cons horiz
+# if coordinate ints == [coord[0][0], (coord[0][0] + 1), (coord[0][0]+2)]
+# elsif coordinates.map { |coord| coord[1] } == [c[0][0], (c[0][0]+1), (c[0][0]+2)]
