@@ -30,9 +30,9 @@ class Board
       false
     end
   end
-
+                            
   def valid_placement?(ship, coords)
-    if ship.length == coords.length && coords.map { |coord| coord[1] } == ["1", "2", "3"]#[coords[0][1].to_s, coords[0][1]+1.to_s, coords[0][1]+2.to_s]
+    if ship.length == coords.length && coords.map { |coord| coord[1].to_i } == (coords[0][1].to_i..coords[0][1].to_i+1).to_a
       # consecutive_coords?(coords)
       true
     # elsif   # the coordinates are consecutive horizontally

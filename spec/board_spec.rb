@@ -69,5 +69,13 @@ RSpec.describe Board do
     expect(board.valid_placement?(submarine, ["C1", "B1"])).to eq(false)
   end
 
+  it 'valid placement for submarine is true' do
+    board = Board.new
+    cruiser = Ship.new("Cruiser", 3)
+    submarine = Ship.new("Submarine", 2)
+    # binding.pry
+    expect(board.valid_placement?(submarine, ["A1", "A2"])).to eq(true)
+  end
+
 
 end
