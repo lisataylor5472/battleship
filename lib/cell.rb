@@ -39,6 +39,8 @@ class Cell
     "H"
     elsif fired_upon? == true
     "M"
+    elsif @ship != nil && arg
+    "S"
     else
     "."
     end
