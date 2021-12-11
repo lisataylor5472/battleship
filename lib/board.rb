@@ -1,3 +1,4 @@
+require 'pry'
 class Board
   def initialize
   end
@@ -30,40 +31,43 @@ class Board
       false
     end
   end
-                            
+
   def valid_placement?(ship, coords)
-    if ship.length == coords.length && coords.map { |coord| coord[1].to_i } == (coords[0][1].to_i..coords[0][1].to_i+1).to_a
-      # consecutive_coords?(coords)
-      true
-    # elsif   # the coordinates are consecutive horizontally
-    # elsif c.map { |coord| coord[1] } == [c[0][1], (c[0][1]+1), (c[0][1]+2)]
+    a = coords.map { |coord| coord[1].to_i }
+    b = (1..4).each_cons(3) { |a| a }
+    if ship.length == coords.length && a.any?(b) == true
     else
-      false
-      # digits_only = []
-      # coordinates.each do |coordinate|
-      #   digits_only << coordinate[1]
-      #   digits_only.each_cons(ship.length) ==
-      # digits_only = []
-      # coordinates.each do |coordinate|
-      #   digits_only << coordinate[1]
-      #   if digits_only == (coordinates.min..coordinates.max).to_a
-      #     true
-      #   end
-      # coordinates.ord.all
+      return false#&& consecutive?(coords) == true
     end
   end
-                                # c = ["A1", "A2", "A4"]   ["1", "2", "4"]
-  # def consecutive_coords?(coords)
-  #   if coords.map { |coord| coord[1] } == [coords[0][0].to_s, coords[0][0]+1.to_s, coords[0][0]+2.to_s]
+
+  # def consecutive(coords)
+  #   # same row
+  #   if coords.map { |coord| coord[1].to_i } == (coords[0][1].to_i..coords[0][1].to_i+1).to_a
+  #     # same column
+  #   elsif coords.map { |coord| coord[1] } == coords.map { |coord| coord[1] }
+  #   else
+  #     false
+  #     # if same_row(coords) == true || same_column(coords) == true
+  #   # else
+  #   #   false
   #   end
   # end
 
+
+  def same_row(coords)
+    if coords.map { |coord| coord[1].to_i } == (1..4).each_cons()
+      return true
+    else
+      return false
+    end
+  end
+  #
+  # def same_column(coords)
+  #   if coords.map { |coord| coord[0] } == (coords[0][0]..coords[-1][0]).to_a
+  #     true
+  #   else
+  #     false
+  #   end
+  # end
 end
-
-
-
-
-
-# elsif the coords are cons horiz
-# if coordinate ints == [coord[0][0], (coord[0][0] + 1), (coord[0][0]+2)]
-# elsif coordinates.map { |coord| coord[1] } == [c[0][0], (c[0][0]+1), (c[0][0]+2)]
