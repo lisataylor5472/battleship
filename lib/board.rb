@@ -1,10 +1,8 @@
 require 'pry'
 class Board
+  attr_reader :cells
   def initialize
-  end
-
-  def cells # so cute
-    {
+    @cells = {
     "A1" => Cell.new("A1"),
     "A2" => Cell.new("A2"),
     "A3" => Cell.new("A3"),
@@ -25,49 +23,37 @@ class Board
   end
 
   def valid_coordinate?(arg)
-    if cells.keys.include?(arg)
+    if @cells.keys.include?(arg)
       true
     else
       false
     end
   end
-
-  def valid_placement?(ship, coords)
-    a = coords.map { |coord| coord[1].to_i }
-    b = (1..4).each_cons(3) { |a| a }
-    if ship.length == coords.length && a.any?(b) == true
-    else
-      return false#&& consecutive?(coords) == true
-    end
-  end
-
-  # def consecutive(coords)
-  #   # same row
-  #   if coords.map { |coord| coord[1].to_i } == (coords[0][1].to_i..coords[0][1].to_i+1).to_a
-  #     # same column
-  #   elsif coords.map { |coord| coord[1] } == coords.map { |coord| coord[1] }
-  #   else
-  #     false
-  #     # if same_row(coords) == true || same_column(coords) == true
-  #   # else
-  #   #   false
-  #   end
-  # end
-
-
-  def same_row(coords)
-    if coords.map { |coord| coord[1].to_i } == (1..4).each_cons()
-      return true
-    else
-      return false
-    end
-  end
   #
-  # def same_column(coords)
-  #   if coords.map { |coord| coord[0] } == (coords[0][0]..coords[-1][0]).to_a
-  #     true
+  # def valid_placement?(ship, coords)
+  #   if (placement_length?(ship, coords) == true) && (same_row?(ship, coords) == true)
   #   else
   #     false
   #   end
   # end
+
+  def placement_length?(ship, coords)
+    ship.length == coords.size
+  end
+
+  def same_row?(ship, coords)
+    a = coords.map { |coord| coord[0] }
+    a.uniq.count == 1
+  end
+
+  def same_column?(coords)
+  end
+
+
 end
+
+# may need this for column? compares valid integers
+# c = []
+# nums = coords.map { |coord| coord[1].to_i }
+# b = (1..4).each_cons(ship.length).to_a
+# nums.none?(b) == true
