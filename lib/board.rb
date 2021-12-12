@@ -1,4 +1,4 @@
-require 'pry'\
+require 'pry'
 
 class Board
   attr_reader :cells
@@ -86,10 +86,9 @@ class Board
   def render(arg = false)
   #binding.pry
   return "  1 2 3 4 \n" +
- "A" + " " + @cells["A1"].render(arg) + " " + @cells["A2"].render(arg) + " " + @cells["A3"].render(arg) + " " + @cells["A4"].render(arg) + " \n"  +
- "B" + " " + @cells["B1"].render(arg) + " " + @cells["B2"].render(arg) + " " + @cells["B3"].render(arg) + " " + @cells["B4"].render(arg) + " \n"  +
- "C" + " " + @cells["C1"].render(arg) + " " + @cells["C2"].render(arg) + " " + @cells["C3"].render(arg) + " " + @cells["C4"].render(arg) + " \n"  +
- "D" + " " + @cells["D1"].render(arg) + " " + @cells["D2"].render(arg) + " " + @cells["D3"].render(arg) + " " + @cells["D4"].render(arg) + " \n"
-
+    "A" + " " + @cells["A1"].render(arg) + " " + @cells["A2"].render(arg) + " " + @cells["A3"].render(arg) + " " + @cells["A4"].render(arg) + " \n"  +
+    "B" + " " + @cells["B1"].render(arg) + " " + @cells["B2"].render(arg) + " " + @cells["B3"].render(arg) + " " + @cells["B4"].render(arg) + " \n"  +
+    "C" + " " + @cells["C1"].render(arg) + " " + @cells["C2"].render(arg) + " " + @cells["C3"].render(arg) + " " + @cells["C4"].render(arg) + " \n"  +
+    "D" + " " + @cells["D1"].render(arg) + " " + @cells["D2"].render(arg) + " " + @cells["D3"].render(arg) + " " + @cells["D4"].render(arg) + " \n"
   end
 end
