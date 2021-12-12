@@ -92,6 +92,4 @@ class Board
  "D" + " " + @cells["D1"].render(arg) + " " + @cells["D2"].render(arg) + " " + @cells["D3"].render(arg) + " " + @cells["D4"].render(arg) + " \n"
 
   end
-
-
 end
