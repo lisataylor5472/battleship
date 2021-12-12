@@ -161,6 +161,18 @@ RSpec.describe Board do
     expect(cell_1 = board.cells["A1"]).to be_instance_of(Cell)
     expect(cell_3.ship == cell_2.ship).to eq(true)
     expect(cell_3.ship).to eq(cruiser)
+  end
 
+  it 'overlaping ships' do
+    board = Board.new
+    cruiser = Ship.new("Cruiser", 3)
+    board.place(cruiser, ["A1", "A2", "A3"])
+    submarine = Ship.new("Submarine", 2)
+     cell_1 = board.cells["A1"]
+     cell_2 = board.cells["A2"]
+     cell_3 = board.cells["A3"]
+
+    expect(board.valid_placement?(submarine, ["A1", "B1"])).to eq(false)
+    expect(board.valid_placement?(submarine, ["A2", "A3"])).to eq(false)
   end
 end

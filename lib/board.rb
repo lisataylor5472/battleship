@@ -35,7 +35,18 @@ class Board
   def valid_placement?(ship, coords)
     placement_length?(ship, coords) &&
     (same_row?(ship, coords) || same_column?(ship, coords)) &&
-    (consecutive_rows?(ship, coords) || consecutive_columns?(ship, coords))
+    (consecutive_rows?(ship, coords) || consecutive_columns?(ship, coords)) &&
+    overlap?(ship,coords)
+  end
+
+  def overlap?(ship, coords)
+    coords.each do |coord|
+        if @cells[coord].ship == nil
+          return true
+        else
+          return false
+        end
+      end
   end
 
   def placement_length?(ship, coords)
