@@ -63,4 +63,12 @@ class Board
     valid_options = ("A".."D").each_cons(ship.length).to_a
     valid_options.any?(letters)
   end
+
+  def place(ship, coords)
+
+    coords.each do |coord|
+      @cells[coord].place_ship(ship)
+
+    end
+  end
 end

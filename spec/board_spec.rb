@@ -150,5 +150,17 @@ RSpec.describe Board do
     expect(board.valid_placement?(cruiser, ["A3", "A2", "A1"])).to eq(false)
   end
 
+  it 'cell object accepts cruiser as its ship' do
+    board = Board.new
+    cruiser = Ship.new("Cruiser", 3)
+    board.place(cruiser, ["A1", "A2", "A3"])
+    cell_1 = board.cells["A1"]
+    cell_2 = board.cells["A2"]
+    cell_3 = board.cells["A3"]
 
+    expect(cell_1 = board.cells["A1"]).to be_instance_of(Cell)
+    expect(cell_3.ship == cell_2.ship).to eq(true)
+    expect(cell_3.ship).to eq(cruiser)
+
+  end
 end
