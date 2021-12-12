@@ -35,7 +35,18 @@ class Board
   def valid_placement?(ship, coords)
     placement_length?(ship, coords) &&
     (same_row?(ship, coords) || same_column?(ship, coords)) &&
-    (consecutive_rows?(ship, coords) || consecutive_columns?(ship, coords))
+    (consecutive_rows?(ship, coords) || consecutive_columns?(ship, coords)) &&
+    overlap?(ship,coords)
+  end
+
+  def overlap?(ship, coords)
+    coords.each do |coord|
+        if @cells[coord].ship == nil
+          return true
+        else
+          return false
+        end
+      end
   end
 
   def placement_length?(ship, coords)
@@ -62,5 +73,23 @@ class Board
     letters = coords.map { |coord| coord[0] }
     valid_options = ("A".."D").each_cons(ship.length).to_a
     valid_options.any?(letters)
+  end
+
+  def place(ship, coords)
+
+    coords.each do |coord|
+      @cells[coord].place_ship(ship)
+
+    end
+  end
+
+  def render(arg = false)
+  #binding.pry
+  return "  1 2 3 4 \n" +
+ "A" + " " + @cells["A1"].render(arg) + " " + @cells["A2"].render(arg) + " " + @cells["A3"].render(arg) + " " + @cells["A4"].render(arg) + " \n"  +
+ "B" + " " + @cells["B1"].render(arg) + " " + @cells["B2"].render(arg) + " " + @cells["B3"].render(arg) + " " + @cells["B4"].render(arg) + " \n"  +
+ "C" + " " + @cells["C1"].render(arg) + " " + @cells["C2"].render(arg) + " " + @cells["C3"].render(arg) + " " + @cells["C4"].render(arg) + " \n"  +
+ "D" + " " + @cells["D1"].render(arg) + " " + @cells["D2"].render(arg) + " " + @cells["D3"].render(arg) + " " + @cells["D4"].render(arg) + " \n"
+
   end
 end
