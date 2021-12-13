@@ -8,12 +8,13 @@ class Gameplay
               :submarine
 
   def initialize
-    @computer_player = computer_player
-    @user_player = user_player
+    @computer_ships_sunk = 0
+    @user_ships_sunk = 0
     @computer_player_board = Board.new
     @user_board = Board.new
     @cruiser = Ship.new("Cruiser", 3)
     @submarine = Ship.new("Submarine", 2)
+
   end
 
   def start
@@ -54,12 +55,10 @@ class Gameplay
     puts "#{user_board.render(true)}"
 
     take_turn
-
-    puts "=============COMPUTER BOARD============="
-    puts "#{@computer_player_board.render(true)}"
-    puts "==============PLAYER BOARD=============="
-    puts "#{@user_board.render(true)}"
-
+  until @computer_ships_sunk == 2
+#Take take turn
+#Untill computer_ships_sunk == true or
+#user_ships_sunk == true
     end
   end
 
@@ -94,16 +93,14 @@ class Gameplay
 
   def take_turn
     puts "=============COMPUTER BOARD============="
-    puts "#{@computer_player_board.render}"
+    puts "#{@computer_player_board.render(true)}"
     puts "==============PLAYER BOARD=============="
     puts "#{@user_board.render(true)}"
-    # user takes a shot - see method below
+
     puts "Enter the coordinate for your shot:"
     user_fires
-    # computer also takes a shot - see method below
-    computer_fires
-        # Feedback
 
+    computer_fires
   end
 
   def user_fires
@@ -114,7 +111,7 @@ class Gameplay
         cell.fire_upon
           if cell.ship != nil && cell.ship.sunk?
             # "X"
-            puts "Your shot on #{input} was a hit! And you sunk my #{cell.ship}!!"
+            puts "Your shot on #{input} was a hit! And you sunk my #{cell.ship.name}!!"
           elsif cell.fired_upon? && cell.ship != nil
             # "H"
             puts "Your shot on #{input} was a hit!"
@@ -136,7 +133,7 @@ class Gameplay
          cell.fire_upon
          if cell.ship != nil && cell.ship.sunk?
            # "X"
-           puts "My shot on #{selected_coord[0]} was a hit! And I sunk your #{cell.ship}!!"
+           puts "My shot on #{selected_coord[0]} was a hit! And I sunk your #{cell.ship.name}!!"
          elsif cell.fired_upon? && cell.ship != nil
            # "H"
            puts "My shot on #{selected_coord[0]} was a hit!"
@@ -149,6 +146,22 @@ class Gameplay
       end
   end
 
+  def computer_ships_sunk
+    #if the board has two sunk ships then
+    # look at the cells, check if they ships on it, check if they are sunk or not
+    #computer looses: "You won!"
+    if @computer_player_board.cells.ship != nil
+      @computer_player_board.cells.ship.sunk? == true
+      @computer_ships_sunk += 1
+    end
+  end
 
-
+  # def computer_ship_sunk
+  #   #if the board has two sunk ships then
+  #   #computer looses: "You won!"
+  #   if @computer_player_board.cells.ship != nil
+  #     @computer_player_board.cells.ship.sunk? == true
+  #     @computer_ships_sunk += 1
+  #   end
+  # end
 end
