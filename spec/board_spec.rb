@@ -147,6 +147,7 @@ RSpec.describe Board do
     submarine = Ship.new("Submarine", 2)
 
     expect(board.valid_placement?(cruiser, ["B1", "C1", "D1"])).to eq(true)
+    #reverse order
     expect(board.valid_placement?(cruiser, ["A3", "A2", "A1"])).to eq(false)
   end
 
