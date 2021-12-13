@@ -1,3 +1,4 @@
+require 'pry'
 class Gameplay
   attr_reader :computer_player,
               :user_player,
@@ -17,18 +18,17 @@ class Gameplay
 
   def start
     puts "Welcome to Battleship!!!"
-    puts"
-                               # #  ( )
-                            ___#_#___|__
-                        _  |____________|  _
-                 _=====| | |            | | |==== _
-           =====| |.---------------------------. | |====
-    <--------------------'   .  .  .  .  .  .  .  .   '--------------/
-    \                                      SS Becky and Lisa       /
-      \_______________________________________________WWS_________/
-    wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww
-    wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww
-    wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww "
+    puts  "                           # #  ( ) \n" +
+          "                        ___#_#___|__\n" +
+          "                    _  |____________|  _\n" +
+          "             _=====| | |   o    o   | | |==== _\n" +
+          "       =====| |.---------------------------. | |====           \n" +
+          "<--------------------'   .  .  .  .  .  .  .  .   '--------------/ \n" +
+          "  [{        o            o                SS Becky and Lisa      / \n" +
+          "   [{_______________________________________________WWS_________/ \n" +
+          "wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww\n" +
+          "wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww\n" +
+          "wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww"
     puts "Enter p to play. Enter q to quit."
 
     input = gets.chomp
@@ -53,13 +53,12 @@ class Gameplay
 
     puts "#{user_board.render(true)}"
 
-    #The turns begins
-    #take_turn
-    #The user sees both boards
-    #The user inputs coordionates to fire on
-    #The computer selects coordinates to fire upon
-    #The results are reported
+    take_turn
 
+    puts "=============COMPUTER BOARD============="
+    puts "#{@computer_player_board.render(true)}"
+    puts "==============PLAYER BOARD=============="
+    puts "#{@user_board.render(true)}"
 
     end
   end
@@ -98,15 +97,58 @@ class Gameplay
     puts "#{@computer_player_board.render}"
     puts "==============PLAYER BOARD=============="
     puts "#{@user_board.render(true)}"
-
+    # user takes a shot - see method below
     puts "Enter the coordinate for your shot:"
-    #User fires on computers' board
-    input = gets.chomp.split(" ").to_a
-      if @computer_player_board.valid_placement?(ship, input) == true
-         @computer_player_board.cells[input].fire_upon
-      elsif
-        puts "Please enter a valid coordinate:"
-        input = gets.chomp.split(" ").to_a
-    end
+    user_fires
+    # computer also takes a shot - see method below
+    computer_fires
+        # Feedback
+
   end
+
+  def user_fires
+      #User fires on computers' board
+    input = gets.chomp
+      if @computer_player_board.cells.keys.any?(input) == true
+        cell = @computer_player_board.cells[input.to_s]
+        cell.fire_upon
+          if cell.ship != nil && cell.ship.sunk?
+            # "X"
+            puts "Your shot on #{input} was a hit! And you sunk my #{cell.ship}!!"
+          elsif cell.fired_upon? && cell.ship != nil
+            # "H"
+            puts "Your shot on #{input} was a hit!"
+          elsif cell.fired_upon? == true
+            # "M"
+            puts "Your shot on #{input} was a miss!"
+          end
+
+      else
+        puts "Please enter a valid coordinate:"
+        user_fires
+      end
+  end
+
+  def computer_fires
+    selected_coord = @user_board.cells.keys.sample(1) # ------> ["A2"]
+    cell = @user_board.cells[selected_coord[0]]
+      if cell.fired_upon? == false
+         cell.fire_upon
+         if cell.ship != nil && cell.ship.sunk?
+           # "X"
+           puts "My shot on #{selected_coord[0]} was a hit! And I sunk your #{cell.ship}!!"
+         elsif cell.fired_upon? && cell.ship != nil
+           # "H"
+           puts "My shot on #{selected_coord[0]} was a hit!"
+         elsif cell.fired_upon? == true
+           # "M"
+           puts "My shot on #{selected_coord[0]} was a miss!"
+         end
+      else
+        computer_fires
+      end
+  end
+
+
+
 end
