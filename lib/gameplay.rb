@@ -6,7 +6,7 @@ class Gameplay
               :cruiser,
               :submarine
 
-  def initialize(computer_player, user_player)
+  def initialize
     @computer_player = computer_player
     @user_player = user_player
     @computer_player_board = Board.new
@@ -53,6 +53,12 @@ class Gameplay
 
     puts "#{user_board.render(true)}"
 
+    #The turns begins
+    #take_turn
+    #The user sees both boards
+    #The user inputs coordionates to fire on
+    #The computer selects coordinates to fire upon
+    #The results are reported
 
 
     end
@@ -85,5 +91,22 @@ class Gameplay
 
   def random_coords(ship)
     @computer_player_board.cells.keys.sample(ship.length)
+  end
+
+  def take_turn
+    puts "=============COMPUTER BOARD============="
+    puts "#{@computer_player_board.render}"
+    puts "==============PLAYER BOARD=============="
+    puts "#{@user_board.render(true)}"
+
+    puts "Enter the coordinate for your shot:"
+    #User fires on computers' board
+    input = gets.chomp.split(" ").to_a
+      if @computer_player_board.valid_placement?(ship, input) == true
+         @computer_player_board.cells[input].fire_upon
+      elsif
+        puts "Please enter a valid coordinate:"
+        input = gets.chomp.split(" ").to_a
+    end
   end
 end
