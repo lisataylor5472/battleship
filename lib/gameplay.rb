@@ -1,20 +1,60 @@
 class Gameplay
-  attr_reader :computer_player, :user, :user_board, :computer_player_board
+  attr_reader :computer_player,
+              :user,
+              :user_board,
+              :computer_player_board,
+              :cruiser,
+              :submarine
 
   def initialize
-    puts "Welcome to BATTLESHIP"
-    puts "Enter p to play. Enter q to quit."
     @computer_player = computer_player
     @user = user
     @computer_player_board = Board.new
     @user_board = Board.new
+    @cruiser = Ship.new("Cruiser", 3)
+    @submarine = Ship.new("Submarine", 2)
   end
 
-  def start_or_quit(p_or_q)
-    if p_or_q == "p"
-      puts "Okay let's play!"
-    elsif p_or_q == "q"
-      puts "Maybe next time!"
+  def start
+    puts "Welcome to Battleship!!!"
+    puts"
+                               # #  ( )
+                            ___#_#___|__
+                        _  |____________|  _
+                 _=====| | |            | | |==== _
+           =====| |.---------------------------. | |====
+    <--------------------'   .  .  .  .  .  .  .  .   '--------------/
+    \                                      SS Becky and Lisa       /
+      \_______________________________________________WWS_________/
+    wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww
+    wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww
+    wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww "
+    puts "Enter p to play. Enter q to quit."
+
+    input = gets.chomp
+      if input == 'p'
+
+    computer_place_ship(@cruiser)
+    computer_place_ship(@submarine)
+
+    puts "I have laid out my ships on the grid."
+    puts "You now need to lay out your two ships"
+    puts "The Cruiser is three units long and the Submarine is two units long."
+
+    puts "#{user_board.render}" +
+        "Enter the squares for the Cruiser (3 spaces):"
+
+    user_place_ship(cruiser, gets.chomp)
+
+    puts "#{user_board.render(true)}" +
+          "Enter the squares for the Submarine (2 spaces):"
+
+    user_place_ship(submarine, gets.chomp)
+
+    puts "#{user_board.render(true)}"
+
+
+
     end
   end
 
