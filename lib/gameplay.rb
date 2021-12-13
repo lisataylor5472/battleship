@@ -1,14 +1,14 @@
 class Gameplay
   attr_reader :computer_player,
-              :user,
+              :user_player,
               :user_board,
               :computer_player_board,
               :cruiser,
               :submarine
 
-  def initialize
+  def initialize(computer_player, user_player)
     @computer_player = computer_player
-    @user = user
+    @user_player = user_player
     @computer_player_board = Board.new
     @user_board = Board.new
     @cruiser = Ship.new("Cruiser", 3)
