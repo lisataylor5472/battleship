@@ -29,11 +29,11 @@ class Cell
   end
 
   def render(arg = false)
-    if @ship != nil && @ship.sunk?
+    if @ship != nil && @ship.sunk? && @ship.health == 0
     "X"
-    elsif fired_upon? && @ship != nil
+    elsif @fired_upon == true && @ship != nil
     "H"
-    elsif fired_upon? == true
+    elsif @fired_upon == true
     "M"
     elsif @ship != nil && arg
     "S"

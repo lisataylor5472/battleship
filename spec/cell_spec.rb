@@ -65,16 +65,17 @@ RSpec.describe Cell do
     cruiser = Ship.new("Cruiser", 3)
     cell.place_ship(cruiser)
     cell.fire_upon
+    cell_2 = Cell.new("A1")
 
     expect(cell.fired_upon?).to eq(true)
+    expect(cell_2.fired_upon?).to eq(false)
+
   end
 
   it 'render "."' do
     cell_1 = Cell.new("B4")
 
     expect(cell_1.render).to eq(".")
-
-
   end
 
   it 'render "M"' do

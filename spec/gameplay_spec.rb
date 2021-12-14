@@ -5,6 +5,7 @@ require './lib/board'
 require './lib/gameplay'
 
 RSpec.describe Gameplay do
+
   it 'exists' do
     game_1 = Gameplay.new
 
