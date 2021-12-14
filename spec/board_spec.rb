@@ -175,6 +175,9 @@ RSpec.describe Board do
 
     expect(board.valid_placement?(submarine, ["A1", "B1"])).to eq(false)
     expect(board.valid_placement?(submarine, ["A2", "A3"])).to eq(false)
+    expect(board.valid_placement?(submarine, ["C1", "C2"])).to eq(true)
+    expect(board.no_overlapping?(submarine, ["A1", "B1"])).to eq(false)
+      expect(board.no_overlapping?(submarine, ["D3", "D4"])).to eq(true)
   end
 
     it 'board render works' do
