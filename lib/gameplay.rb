@@ -1,11 +1,8 @@
 require 'pry'
 class Gameplay
-  attr_reader :computer_player,
-              :user_player,
-              :user_board,
-              :computer_player_board,
-              :cruiser,
-              :submarine
+  attr_reader :user_board,
+              :computer_player_board
+
 
   def initialize
     @user_cruiser = Ship.new("Cruiser", 3)
@@ -58,8 +55,7 @@ class Gameplay
 
         while game_over? == false
           take_turn
-      end
-
+        end
 
           if @computer_ships_sunk == 2
           puts "****************************************"
@@ -72,6 +68,14 @@ class Gameplay
           end
     else exit
     end
+        @computer_player_board = Board.new
+        @user_board = Board.new
+        @user_cruiser = Ship.new("Cruiser", 3)
+        @computer_cruiser = Ship.new("Cruiser", 3)
+        @user_submarine = Ship.new("Submarine", 2)
+        @computer_submarine = Ship.new("Submarine", 2)
+        @computer_ships_sunk = 0
+        @user_ships_sunk = 0
         start
 
   end
@@ -111,7 +115,7 @@ class Gameplay
 
   def take_turn
     puts "=============COMPUTER BOARD============="
-    puts "#{@computer_player_board.render(true)}"
+    puts "#{@computer_player_board.render}"
     puts "==============PLAYER BOARD=============="
     puts "#{@user_board.render(true)}"
 
@@ -123,7 +127,7 @@ class Gameplay
 
   def user_fires
     input = gets.chomp
-      if @computer_player_board.cells.keys.any?(input) == true
+      if @computer_player_board.cells.keys.any?(input) == true && @computer_player_board.cells[input.to_s].fired_upon? == false
         cell = @computer_player_board.cells[input.to_s]
         cell.fire_upon
           if cell.ship != nil && cell.ship.sunk?
@@ -138,13 +142,13 @@ class Gameplay
             puts "Your shot on #{input} was a miss!"
           end
       else
-        puts "Please enter a valid coordinate:"
+        puts "Please enter a valid coordinate that has not been fired upon:"
         user_fires
       end
   end
 
   def computer_fires
-    selected_coord = @user_board.cells.keys.sample(1) # ------> ["A2"]
+    selected_coord = @user_board.cells.keys.sample(1)
     cell = @user_board.cells[selected_coord[0]]
       if cell.fired_upon? == false
          cell.fire_upon

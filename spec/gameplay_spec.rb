@@ -5,6 +5,7 @@ require './lib/board'
 require './lib/gameplay'
 
 RSpec.describe Gameplay do
+
   it 'exists' do
     game_1 = Gameplay.new
 
@@ -25,14 +26,5 @@ RSpec.describe Gameplay do
     cell_1 = game_1.computer_player_board.cells["A1"]
 
     expect(game_1.input_coords("A1 A2 A3")).to eq(["A1", "A2", "A3"])
-  end
-
-  it 'game _over? is true' do
-    game_1 = Gameplay.new
-    cruiser = Ship.new("Cruiser", 3)
-    cell_1 = game_1.computer_player_board.cells["A1"]
-
-    expect(game_1.game_over?).to eq(true)
-    #expect(game_1.game_over?).to eq(false)
   end
 end

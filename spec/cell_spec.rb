@@ -76,8 +76,6 @@ RSpec.describe Cell do
     cell_1 = Cell.new("B4")
 
     expect(cell_1.render).to eq(".")
-
-
   end
 
   it 'render "M"' do
